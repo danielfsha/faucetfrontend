@@ -8,9 +8,8 @@ export const client = createThirdwebClient({
 export const chain = defineChain(11155111)
 
 // TOKEN: 0x458213f469e0E97579b798178eBf9F1110D3A9Ba
-// FAUCET deployed using remix: 0xd5A1500F1EF83A451985323C6b69e0Aa79D3f97a
-// FAUCT deployed using command line: 0x940e91d9e7835c9DaBD047380a9F78d51462D1A6
-const contractAddress = '0x940e91d9e7835c9DaBD047380a9F78d51462D1A6'
+// FAUCET deployed using remix: 0x34b9d2633c7c7d26838d301a63c1f768183380e5
+const contractAddress = '0x34b9d2633c7c7d26838d301a63c1f768183380e5'
 
 const ABI = [
     {
@@ -44,6 +43,45 @@ const ABI = [
         "type": "event"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_account",
+                "type": "address"
+            }
+        ],
+        "name": "requestTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_lockTime",
+                "type": "uint256"
+            }
+        ],
+        "name": "setLockTime",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "setWithdrawalAmount",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "anonymous": false,
         "inputs": [
             {
@@ -61,6 +99,17 @@ const ABI = [
         ],
         "name": "Withdraw",
         "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "withdrawAllFunds",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
     },
     {
         "inputs": [],
@@ -88,13 +137,18 @@ const ABI = [
             {
                 "components": [
                     {
-                        "internalType": "uint256",
-                        "name": "timestamp",
-                        "type": "uint256"
+                        "internalType": "address",
+                        "name": "to",
+                        "type": "address"
                     },
                     {
                         "internalType": "uint256",
                         "name": "amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "timestamp",
                         "type": "uint256"
                     }
                 ],
@@ -153,39 +207,6 @@ const ABI = [
     },
     {
         "inputs": [],
-        "name": "requestTokens",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "_lockTime",
-                "type": "uint256"
-            }
-        ],
-        "name": "setLockTime",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "_amount",
-                "type": "uint256"
-            }
-        ],
-        "name": "setWithdrawalAmount",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "token",
         "outputs": [
             {
@@ -213,13 +234,18 @@ const ABI = [
         "name": "userTransactions",
         "outputs": [
             {
-                "internalType": "uint256",
-                "name": "timestamp",
-                "type": "uint256"
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
                 "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timestamp",
                 "type": "uint256"
             }
         ],
@@ -228,7 +254,7 @@ const ABI = [
     },
     {
         "inputs": [],
-        "name": "widthdrawalAmount",
+        "name": "withdrawalAmount",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -238,17 +264,6 @@ const ABI = [
         ],
         "stateMutability": "view",
         "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "withdrawAllFunds",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "stateMutability": "payable",
-        "type": "receive"
     }
 ]
 
