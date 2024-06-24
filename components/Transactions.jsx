@@ -32,7 +32,9 @@ const Transactions = ({ transactions }) => {
                   Requested 100 $AFLX on Sepolia Testnet
                 </p>
 
-                <p className="font-mono text-sm">65 blocks ago</p>
+                {/* <p className="font-mono text-sm">
+                  {transaction.timestamp} blocks ago
+                </p> */}
               </div>
             </div>
           </div>
