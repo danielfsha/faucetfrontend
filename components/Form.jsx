@@ -2,12 +2,33 @@
 
 import { useState } from "react";
 
+import { prepareContractCall } from "thirdweb";
+
+import { useActiveAccount, useSendTransaction } from "thirdweb/react";
+
+import { CONTRACT } from "@/utils/constant";
+
 const Form = () => {
-  const [address, setAddress] = useState("");
+  const [requestedAddress, setRequestedAddress] = useState("");
+
+  const account = useActiveAccount();
+
+  const { mutate: sendTransaction, isPending } = useSendTransaction();
 
   const requestTokens = async (e) => {
     e.preventDefault();
-    alert("tokens requested");
+
+    if (account == undefined || requestedAddress.length < 42) return;
+
+    const tx = await prepareContractCall({
+      contract: CONTRACT,
+      method: "requestTokens",
+      params: [requestedAddress],
+    });
+
+    sendTransaction(tx);
+
+    alert(tx.hash);
   };
 
   return (
@@ -30,8 +51,8 @@ const Form = () => {
         <input
           name="address"
           type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          value={requestedAddress}
+          onChange={(e) => setRequestedAddress(e.target.value)}
           className="input"
           placeholder="0X0000000000000000000000000000000000000000"
         />
