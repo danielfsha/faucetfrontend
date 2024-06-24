@@ -256,5 +256,5 @@ export const CONTRACT = getContract({
     client: client,
     chain: chain,
     address: contractAddress,
-    abi: abi,
+    abi: ABI,
 })

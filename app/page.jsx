@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 
+import { ConnectButton } from "thirdweb/react";
+
+import { client, chain } from "@/utils/constant";
+
 export default function Home() {
   const [address, setAddress] = useState("");
 
@@ -11,9 +15,7 @@ export default function Home() {
       <nav className="nav wrapper">
         <h2>Faucet</h2>
 
-        <button className="btn" onClick={() => alert("wallet connected")}>
-          connect wallet
-        </button>
+        <ConnectButton client={client} chain={chain} />
       </nav>
 
       {/* form */}
@@ -48,7 +50,6 @@ export default function Home() {
       </section>
 
       {/* transactions */}
-
       <section className="wrapper wrapper-sm">
         <div className="flex items-center justify-between py-2">
           <p class="font-mono text-lg">Recent Transaction</p>
